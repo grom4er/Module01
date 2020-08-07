@@ -2,8 +2,9 @@
 
 My realisation of Homework from https://github.com/PerfectStorms/BE-03/tree/master/module01
 
-My work in russian
-Финальное техническое задание:
+
+My work in russian:
+
 Необходимо реализовать базу знаний книг (не обязательно книг). 
 Пользователь вводит название книги, данные сохраняются в массив.
 
