@@ -7,7 +7,7 @@ Here I will describe the problems that I could not solve:
 1. I use System.out.println("\n".repeat(10));
 because it is difficult to find work my idea a way without crutches for all platforms.
 2. I must everywhere use throws InterruptedException to use TimeUnit.SECONDS.sleep(time); - fixed i use myself method can not work perfect (maybe)
-3. I am use regular expression twice. - fixed. Not use
+3. I am use regular expression twice. - fixed. Not shure
 3. Username can have spaces. And cannot be in Ukraine symbols - fixed
 4. Book name cannot have symbol "," - big problem
 5. if the user changes his mind about performing the operation. He always must DO it;
@@ -16,6 +16,7 @@ because it is difficult to find work my idea a way without crutches for all plat
 8. 2 method have 80% same code;
 9. Need do normal print of all books;
 10. Add joke;
+11. Add method to check books (he is clean)
 
 
 
