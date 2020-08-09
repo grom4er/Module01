@@ -12,6 +12,11 @@ because it is difficult to find work my idea a way without crutches for all plat
 4. Book name cannot have symbol "," - big problem
 5. if the user changes his mind about performing the operation. He always must DO it;
 6. Add more class to name functions
+7. Problems with scanner;
+8. 2 method have 80% same code;
+9. Need do normal print of all books;
+10. Add joke;
+
 
 
 
@@ -32,6 +37,7 @@ public class Realization {
             , "8. Exit"
             , "99. Joke"};
     static String bookToArray = "";
+    static String bookToarrayUpdate;
 
 
     public static void start() {
@@ -80,26 +86,35 @@ public class Realization {
                     }
                     break;
                 case "3":
-                    //code add
+                    if (bookToArray.length() <= 1) {
+                        robot("Sorry, but in my library no one book. Add first.");
+                    } else {
+                        changeBookName();
+                    }
                     break;
                 case "4":
                     System.out.println(Arrays.toString(bookToArray.split(",")));
                     break;
                 case "5":
-                    //code add
+                    if (bookToArray.length() <= 1) {
+                        robot("Sorry, but in my library no one book. Add first.");
+                    } else {
+                        findBook();
+                    }
                     break;
                 case "6":
-                    //code add
+                    robot("Books are sorted. Please, check it in menu \"4\" ");
+                    Arrays.toString(bookToArray.split(","));
                     break;
                 case "7":
-                    //code add
+                    robotSpeedChange();
                     break;
                 case "8":
                     robot("Bye");
                     System.exit(0);
                     break;
                 case "99":
-                    //code add
+                    System.out.println("best code == no code");
                     break;
                 case "menu":
                     showMenu();
@@ -154,7 +169,8 @@ public class Realization {
         robot("You want to change my speed? Write y if yes or write n if no");
         while (true) {
             stopDublicateCode();
-            String answer = sc.nextLine();
+            String answer = sc.next();
+            sc.skip("\n");
             if (answer.equalsIgnoreCase("n")) {
                 robot(String.format("You don't change anything, speed still is : %d", timeRobot));
                 return;
@@ -189,6 +205,7 @@ public class Realization {
             }
             robot("Sorry, it not int number. Try again!");
             sc.next();
+
         }
     }
 
@@ -303,24 +320,88 @@ public class Realization {
             robot("Just write number of book you want to delete");
             stopDublicateCode();
             int choice = checkDigit();
-            if (choice <= 0 || choice > tempArray.length + 1) {
+            int tempLength  = tempArray.length == 1? tempArray.length : tempArray.length +1;
+            if (choice <= 0 || choice >= tempLength) {
                 robot("Sorry, you do mistake. Try again.");
                 continue;
             }
-            bookArray[choice - 1] = "";
-            String testRes = "";
+            bookArray[choice - 1] = " ";
+             bookToarrayUpdate = "";
             for (int i = 0; i < bookArray.length; i++) {
                 String s = bookArray[i];
                 if (!s.equals(" ") || s.length() > 1) {
-                    testRes += s + ",";
+                    bookToarrayUpdate += s + ",";
                 }
-
             }
-            bookToArray = testRes;
-            break;
+           bookToArray = bookToarrayUpdate;
+            if(bookArray.length <=1){
+                robot("Sorry, books are over");
+                return;
+            }
+            robot("Do you want delete more books? Write Y or N like always");
+            System.out.println();
+            stopDublicateCode();
+            String answ = sc.next();
+            sc.skip("\n");
+            if (answ.equalsIgnoreCase("n")) {
+                return;
+            }
+            robot("Sorry, you mistake. Try again.");
 
         }
+        }
+    static void changeBookName() {
+        while (true) {
+            robot("Brrrrrrrrr, you choice change name book. I show you list of books");
+            String[] tempArray = bookToArray.split(",");
+            String[] bookArray = bookToArray.split(",");
+            int count = 0;
+            for (int i = 0; i < tempArray.length; i++) {
+                tempArray[i] = ++count + " # of book  is" + tempArray[i];
+            }
+            System.out.println();
+            for (String book : tempArray) {
+                System.out.println(book);
+            }
+            pause(timeRobot+2);
+            robot("Just write number of book you want to change");
+            stopDublicateCode();
+            int choice = checkDigit();
+            int tempLength  = tempArray.length == 1? tempArray.length : tempArray.length +1;
+            if (choice <= 0 || choice >= tempLength) {
+                robot("Sorry, you do mistake. Try again.");
+                continue;
+            }
+            robot("Now write new name of book");
+            stopDublicateCode();
+            bookArray[choice - 1] = sc.nextLine();
+            bookToarrayUpdate = "";
+            for (int i = 0; i < bookArray.length; i++) {
+                String s = bookArray[i];
+                if (!s.equals(" ") || s.length() > 1) {
+                    bookToarrayUpdate += s + ",";
+                }
+            }
+            bookToArray = bookToarrayUpdate;
+            if(bookArray.length <=1){
+                robot("Sorry, books are over");
+                return;
+            }
+            robot("Do you want change more books? Write Y or N like always");
+            System.out.println();
+            stopDublicateCode();
+            String answ = sc.next();
+            sc.skip("\n");
+            if (answ.equalsIgnoreCase("n")) {
+                return;
+            }
+            robot("Sorry, you mistake. Try again.");
+        }
     }
-}
+    static void findBook(){
+
+    }
+    }
+
 
 
