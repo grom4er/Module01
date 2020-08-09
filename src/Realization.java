@@ -17,6 +17,7 @@ because it is difficult to find work my idea a way without crutches for all plat
 9. Need do normal print of all books;
 10. Add joke;
 11. Add method to check books (he is clean)
+12. reconstruction method (or just fix 6 task)
 
 
 
