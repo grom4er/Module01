@@ -7,6 +7,7 @@ I know this program should be simpler.
 But I decided to make myself a challenge.
 And also, I think it's fun!
 Let you have fun too!
+Idea - interactive chat-bot
      */
 
 
@@ -15,7 +16,8 @@ Let you have fun too!
 
 
     public static void main(String[] args)  {
-        System.out.println("For test menu write test\nFor test full program write start");
+
+        System.out.println("Idea - interactive chat-bot \nFor test menu write test\nFor test full program write start");
         while (true){
             String answ = scanner.nextLine();
             if(answ.equalsIgnoreCase("start")){

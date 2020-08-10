@@ -14,7 +14,7 @@ because it is difficult to find work my idea a way without crutches for all plat
 5. if the user changes his mind about performing the operation. He always must DO it;
 6. Add more class to name functions - need do it after code review
 7. Problems with scanner; - fixed;
-7.5 Problem with number Scanner; - big problem
+7.5 Problem with number Scanner; - big problem - fixed
 8. 2 method have 80% same code; - update 4 method
 9. Need do normal print of all books; - fix
 10. Add joke; - fix(1 joke count)
@@ -232,7 +232,7 @@ public class Realization {
     static boolean checkName(String name) {
         char[] array = name.toCharArray();
         for (char check : array) {
-            if (Character.isLetter(check) == false) {
+            if (!Character.isLetter(check)) {
                 return false;
             }
         }
@@ -244,7 +244,7 @@ public class Realization {
         for (int i = 0; i < arrayMenu.length - 1; i++) {
             System.out.println(arrayMenu[i]);
         }
-        if ((int) Math.random() * 100 == 99) {
+        if ((int) (Math.random() * 100) == 99) {
             System.out.println(arrayMenu[arrayMenu.length - 1]);
         }
     }
