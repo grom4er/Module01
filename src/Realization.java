@@ -14,13 +14,13 @@ because it is difficult to find work my idea a way without crutches for all plat
 6. Add more class to name functions
 7. Problems with scanner; - fixed;
 8. 2 method have 80% same code; - update 4 method
-9. Need do normal print of all books;
-10. Add joke;
-11. Add method to check books (he is clean)
+9. Need do normal print of all books; - fix
+10. Add joke; - fix(1 joke count)
+11. Add method to check books (he is clean) - fix
 12. reconstruction methods (or just fix 6 task)
 13. Test 2 fast to print sometimes? (String with text faster System...hmm)
 14. Need change logic method books ? - think 5/10
-15. Can be add duplicate books;
+15. Can be add duplicate books; - fix
 16. Some menu can work without books;
 
 
@@ -273,6 +273,9 @@ public class Realization {
             boolean checkBool = true;
             stopDublicateCode();
             String check = sc.nextLine();
+            if(findBookVer2(check)){
+                continue;
+            }
             char[] temp = check.toCharArray();
             if (check.length() == 2
                     && !String.valueOf(temp[0]).equals(" ")
@@ -313,7 +316,8 @@ public class Realization {
                 "\n1. Name must be more 1 symbol " +
                 "\n2. First symbol must be always be a letter " +
                 "\n3. Letters must be more then another symbols" +
-                "\n4. Books name cannot be have symbol \",\"");
+                "\n4. Books name cannot be have symbol \",\"" +
+                "\n5. Books cannot be repeat if it have in libary");
         pause(timeRobot + 2);
 
     }
@@ -467,15 +471,16 @@ public class Realization {
         }
         robot("Sorry, but you book not find here");
     }
-    static void findBookVer2(String bookName) {
+    static boolean findBookVer2(String bookName) {
         String[] tempArray = bookToArray.split(",");
         for (String checkName : tempArray) {
             if (checkName.equalsIgnoreCase(bookName)) {
-                robot("I find you book!");
-                return;
+
+                return true;
             }
         }
-        robot("Sorry, but you book not find here");
+        robot("Sorry, but this book i have");
+        return false;
     }
 
     static void errorRobotSay() {
