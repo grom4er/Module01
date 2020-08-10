@@ -3,15 +3,16 @@ import java.util.Scanner;
 
 
 /*
-Here I will describe the problems that I could not solve:
+Here I will describe the problems that I could not solve (or not):
 1. I use System.out.println("\n".repeat(10));
 because it is difficult to find work my idea a way without crutches for all platforms.
 2. I must everywhere use throws InterruptedException to use TimeUnit.SECONDS.sleep(time); - fixed i use myself method can not work perfect (maybe)
 3. I am use regular expression twice. - fixed. Not sure
 3. Username can have spaces. And cannot be in Ukraine symbols - fixed
+4. Username cannot have double-triple name like Ras Abdul etc. - that i not fix;
 4. Book name cannot have symbol "," - big problem
 5. if the user changes his mind about performing the operation. He always must DO it;
-6. Add more class to name functions
+6. Add more class to name functions - need do it after code review
 7. Problems with scanner; - fixed;
 8. 2 method have 80% same code; - update 4 method
 9. Need do normal print of all books; - fix
@@ -19,9 +20,9 @@ because it is difficult to find work my idea a way without crutches for all plat
 11. Add method to check books (he is clean) - fix
 12. reconstruction methods (or just fix 6 task)
 13. Test 2 fast to print sometimes? (String with text faster System...hmm)
-14. Need change logic method books ? - think 5/10
+14. Need change logic method books ? - think 5/10.Better do in after 6;
 15. Can be add duplicate books; - fix
-16. Some menu can work without books;
+16. Some menu can work without books; - fix
 
 
 
