@@ -297,10 +297,11 @@ public class Realization {
                 }
             }
             if (checkBool) {
-                robot("Sorry, but you do mistake. Book names has rules:");
+                errorRobotSay();
+                robot("Book names has rules:");
                 rulesBooksName();
                 System.out.println("\n".repeat(12));
-                errorRobotSay();
+
             }
         }
 
@@ -457,6 +458,16 @@ public class Realization {
     }
 
     static void findBook(String bookName) {
+        String[] tempArray = bookToArray.split(",");
+        for (String checkName : tempArray) {
+            if (checkName.equalsIgnoreCase(bookName)) {
+                robot("I find you book!");
+                return;
+            }
+        }
+        robot("Sorry, but you book not find here");
+    }
+    static void findBookVer2(String bookName) {
         String[] tempArray = bookToArray.split(",");
         for (String checkName : tempArray) {
             if (checkName.equalsIgnoreCase(bookName)) {
