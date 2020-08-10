@@ -7,17 +7,19 @@ Here I will describe the problems that I could not solve:
 1. I use System.out.println("\n".repeat(10));
 because it is difficult to find work my idea a way without crutches for all platforms.
 2. I must everywhere use throws InterruptedException to use TimeUnit.SECONDS.sleep(time); - fixed i use myself method can not work perfect (maybe)
-3. I am use regular expression twice. - fixed. Not shure
+3. I am use regular expression twice. - fixed. Not sure
 3. Username can have spaces. And cannot be in Ukraine symbols - fixed
 4. Book name cannot have symbol "," - big problem
 5. if the user changes his mind about performing the operation. He always must DO it;
 6. Add more class to name functions
-7. Problems with scanner;
+7. Problems with scanner; - fixed;
 8. 2 method have 80% same code;
 9. Need do normal print of all books;
 10. Add joke;
 11. Add method to check books (he is clean)
-12. reconstruction method (or just fix 6 task)
+12. reconstruction methods (or just fix 6 task)
+13. Test 2 fast to print sometimes? (String with text faster System...hmm)
+14. Need change logic add books? - think 5/10
 
 
 
@@ -63,11 +65,11 @@ public class Realization {
 
     static void menuOfProgram() {
         while (true) {
-            robot(String.format("Brrrr, now we in menu of my library %s. Choice menu:", userName == null ? "Guest" : userName));
+            robot(String.format("*Robot sounds*, now we in menu of my library %s. Choice menu:", userName == null ? "Guest" : userName));
             System.out.println();
             showMenu();
             pause(timeRobot+2);
-            robot("Brrrrrr, what menu you want to use? Write number");
+            robot("*Robot sounds*, what menu you want to use? Write number");
             menu();
         }
     }
@@ -171,18 +173,19 @@ public class Realization {
         robot("You want to change my speed? Write y if yes or write n if no");
         while (true) {
             stopDublicateCode();
-            String answer = sc.next();
-            sc.skip("\n");
+            String answer = sc.nextLine();
             if (answer.equalsIgnoreCase("n")) {
                 robot(String.format("You don't change anything, speed still is : %d", timeRobot));
                 return;
             } else if (answer.equalsIgnoreCase("y")) {
                 while (true) {
-                    robot("Brrrrrrrr, what speed you want?");
+                    robot("*Robot sounds*, what speed you want?");
+                    stopDublicateCode();
                     int check = checkDigit();
+                    sc.skip("\n");
                     if (check >= 3 && check <= 20) {
                         timeRobot = check;
-                        robot(String.format("Brrrrrrr, now my speed is: %d", timeRobot));
+                        robot(String.format("*Robot sounds*, now my speed is: %d", timeRobot));
                         return;
                     } else {
                         robot("Sorry, you number is wrong.");
@@ -206,7 +209,8 @@ public class Realization {
                 return Integer.parseInt(sc.next());
             }
             robot("Sorry, it not int number. Try again!");
-            sc.next();
+            stopDublicateCode();
+            sc.nextLine();
 
         }
     }
@@ -233,7 +237,7 @@ public class Realization {
 
     static void addBook() {
         while (true) {
-            robot("Brrrrrrrrr, you choice add book. Write book name:");
+            robot("*robot sounds*, you choice add book. Write book name:");
             checkNameBook();
             robot("Do you want add more books? Write Y or N like always");
             System.out.println();
@@ -241,6 +245,9 @@ public class Realization {
             String answ = sc.nextLine();
             if (answ.equalsIgnoreCase("n")) {
                 return;
+            }
+            else if(answ.equalsIgnoreCase("y")){
+                continue;
             }
             robot("Sorry, you mistake. Try again.");
 
@@ -307,7 +314,7 @@ public class Realization {
 
     static void deleteBook() {
         while (true) {
-            robot("Brrrrrrrrr, you choice delete book. I show you list of books");
+            robot("*Robot sounds*, you choice delete book. I show you list of books");
             String[] tempArray = bookToArray.split(",");
             String[] bookArray = bookToArray.split(",");
             int count = 0;
@@ -322,6 +329,7 @@ public class Realization {
             robot("Just write number of book you want to delete");
             stopDublicateCode();
             int choice = checkDigit();
+            sc.skip("\n");
             int tempLength  = tempArray.length == 1? tempArray.length : tempArray.length +1;
             if (choice <= 0 || choice >= tempLength) {
                 robot("Sorry, you do mistake. Try again.");
@@ -344,9 +352,12 @@ public class Realization {
             System.out.println();
             stopDublicateCode();
             String answ = sc.next();
-            sc.skip("\n");
+
             if (answ.equalsIgnoreCase("n")) {
                 return;
+            }
+            else if(answ.equalsIgnoreCase("y")){
+                continue;
             }
             robot("Sorry, you mistake. Try again.");
 
@@ -354,7 +365,7 @@ public class Realization {
         }
     static void changeBookName() {
         while (true) {
-            robot("Brrrrrrrrr, you choice change name book. I show you list of books");
+            robot("*Robot sounds*, you choice change name book. I show you list of books");
             String[] tempArray = bookToArray.split(",");
             String[] bookArray = bookToArray.split(",");
             int count = 0;
@@ -369,6 +380,7 @@ public class Realization {
             robot("Just write number of book you want to change");
             stopDublicateCode();
             int choice = checkDigit();
+            sc.skip("\n");
             int tempLength  = tempArray.length == 1? tempArray.length : tempArray.length +1;
             if (choice <= 0 || choice >= tempLength) {
                 robot("Sorry, you do mistake. Try again.");
@@ -392,8 +404,7 @@ public class Realization {
             robot("Do you want change more books? Write Y or N like always");
             System.out.println();
             stopDublicateCode();
-            String answ = sc.next();
-            sc.skip("\n");
+            String answ = sc.nextLine();
             if (answ.equalsIgnoreCase("n")) {
                 return;
             }
