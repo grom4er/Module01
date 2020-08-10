@@ -21,6 +21,7 @@ because it is difficult to find work my idea a way without crutches for all plat
 13. Test 2 fast to print sometimes? (String with text faster System...hmm)
 14. Need change logic method books ? - think 5/10
 15. Can be add duplicate books;
+16. Some menu can work without books;
 
 
 
@@ -98,6 +99,7 @@ public class Realization {
                     }
                     break;
                 case "4":
+                    System.out.println();
                     if (bookToArray.length() <= 1) {
                         robot("Sorry, but in my library no one book. Add first.");
                     } else {
@@ -112,8 +114,12 @@ public class Realization {
                     }
                     break;
                 case "6":
-                    robot("Books are sorted. Please, check it in menu \"4\" ");
-                    Arrays.sort(bookToArray.split(","));
+                    if (bookToArray.length() <= 1) {
+                        robot("Sorry, but in my library no one book. Add first.");
+                    } else {
+                        robot("Books are sorted. Please, check it in menu \"4\" ");
+                        Arrays.sort(bookToArray.split(","));
+                    }
                     break;
                 case "7":
                     robotSpeedChange();
@@ -390,6 +396,7 @@ public class Realization {
                 errorRobotSay();
                 continue;
             }
+            System.out.println();
             robot("Now write new name of book");
             stopDublicateCode();
             bookArray[choice - 1] = sc.nextLine();
@@ -420,11 +427,12 @@ public class Realization {
             robot("I can show you all books or you can write name of book");
             robot("Write \"show\", and i just show you books");
             robot("Or write  \"find\", and i try find it");
+            System.out.println();
             String choiceToFind;
             stopDublicateCode();
             choiceToFind = sc.nextLine();
             if (choiceToFind.equalsIgnoreCase("show")) {
-                //print method
+                showBooks();
                 robot("Do you want find more books? Y or N like always");
                 stopDublicateCode();
                 choiceToFind = sc.nextLine();
@@ -465,6 +473,8 @@ public class Realization {
 
     static void showBooks() {
         robot("Now i show you books in library");
+        System.out.println("\n".repeat(12));
+        System.out.println("Books in libary:");
         String[] tempArray = bookToArray.split(",");
         for (String bookName : tempArray) {
             System.out.print(bookName + " ");
