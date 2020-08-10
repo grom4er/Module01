@@ -14,6 +14,7 @@ because it is difficult to find work my idea a way without crutches for all plat
 5. if the user changes his mind about performing the operation. He always must DO it;
 6. Add more class to name functions - need do it after code review
 7. Problems with scanner; - fixed;
+7.5 Problem with number Scanner; - big problem
 8. 2 method have 80% same code; - update 4 method
 9. Need do normal print of all books; - fix
 10. Add joke; - fix(1 joke count)
@@ -23,6 +24,7 @@ because it is difficult to find work my idea a way without crutches for all plat
 14. Need change logic method books ? - think 5/10.Better do in after 6;
 15. Can be add duplicate books; - fix
 16. Some menu can work without books; - fix
+17. add comentary
 
 
 
@@ -217,13 +219,13 @@ public class Realization {
     static int checkDigit() {
         System.out.println();
         while (true) {
-            if (sc.hasNextInt()) {
-                return Integer.parseInt(sc.next());
+            try {
+                return Integer.parseInt(sc.nextLine());
+            } catch (Exception e) {
+                System.out.println("lala");
+                errorRobotSay();
+                stopDublicateCode();
             }
-            errorRobotSay();
-            stopDublicateCode();
-            sc.nextLine();
-
         }
     }
 
@@ -325,7 +327,6 @@ public class Realization {
 
     static void stopDublicateCode() {
         System.err.print("\nWrite here:");
-
     }
 
     static void deleteBook() {
