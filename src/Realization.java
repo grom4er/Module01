@@ -320,7 +320,7 @@ public class Realization {
                 "\n2. First symbol must be always be a letter " +
                 "\n3. Letters must be more then another symbols" +
                 "\n4. Books name cannot be have symbol \",\"" +
-                "\n5. Books cannot be repeat if it have in libary");
+                "\n5. Books cannot be repeat if it have in library");
         pause(timeRobot + 2);
 
     }
@@ -492,7 +492,7 @@ public class Realization {
     static void showBooks() {
         robot("Now i show you books in library");
         System.out.println("\n".repeat(12));
-        System.out.println("Books in libary:");
+        System.out.println("Books in library:");
         String[] tempArray = bookToArray.split(",");
         for (String bookName : tempArray) {
             System.out.print(bookName + " ");
