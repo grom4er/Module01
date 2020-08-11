@@ -196,7 +196,6 @@ public class Realization {
                     robot("*Robot sounds*, what speed you want?");
                     stopDublicateCode();
                     int check = checkDigit();
-                    sc.skip("\n");
                     if (check >= 3 && check <= 20) {
                         timeRobot = check;
                         robot(String.format("*Robot sounds*, now my speed is: %d", timeRobot));
@@ -346,7 +345,6 @@ public class Realization {
             robot("Just write number of book you want to delete");
             stopDublicateCode();
             int choice = checkDigit();
-            sc.skip("\n");
             int tempLength = tempArray.length == 1 ? tempArray.length : tempArray.length + 1;
             if (choice <= 0 || choice >= tempLength) {
                 errorRobotSay();
@@ -397,7 +395,6 @@ public class Realization {
             robot("Just write number of book you want to change");
             stopDublicateCode();
             int choice = checkDigit();
-            sc.skip("\n");
             int tempLength = tempArray.length == 1 ? tempArray.length : tempArray.length + 1;
             if (choice <= 0 || choice >= tempLength) {
                 errorRobotSay();
