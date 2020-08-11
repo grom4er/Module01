@@ -25,6 +25,7 @@ because it is difficult to find work my idea a way without crutches for all plat
 15. Can be add duplicate books; - fix
 16. Some menu can work without books; - fix
 17. add comentary
+18. Book change logic have mistake
 
 
 
@@ -183,7 +184,7 @@ public class Realization {
     }
 
     static void robotSpeedChange() {
-
+        System.out.println();
         robot("You want to change my speed? Write y if yes or write n if no");
         while (true) {
             stopDublicateCode();
@@ -205,9 +206,7 @@ public class Realization {
                         robot("Like i said before, it must be 3 or more where max is 20");
                         errorRobotSay();
                     }
-
                 }
-
             } else {
                 errorRobotSay();
             }
@@ -221,7 +220,6 @@ public class Realization {
             try {
                 return Integer.parseInt(sc.nextLine());
             } catch (Exception e) {
-                System.out.println("lala");
                 errorRobotSay();
                 stopDublicateCode();
             }
@@ -264,8 +262,6 @@ public class Realization {
             errorRobotSay();
 
         }
-
-
     }
 
     static void checkNameBook() {
@@ -275,7 +271,7 @@ public class Realization {
             boolean checkBool = true;
             stopDublicateCode();
             String check = sc.nextLine();
-            if(findBookVer2(check)){
+            if (findBookVer2(check)) {
                 continue;
             }
             char[] temp = check.toCharArray();
@@ -306,10 +302,8 @@ public class Realization {
                 robot("Book names has rules:");
                 rulesBooksName();
                 System.out.println("\n".repeat(12));
-
             }
         }
-
     }
 
     static void rulesBooksName() {
@@ -321,7 +315,6 @@ public class Realization {
                 "\n4. Books name cannot be have symbol \",\"" +
                 "\n5. Books cannot be repeat if it have in library");
         pause(timeRobot + 2);
-
     }
 
     static void stopDublicateCode() {
@@ -374,7 +367,6 @@ public class Realization {
                 continue;
             }
             errorRobotSay();
-
         }
     }
 
@@ -385,7 +377,7 @@ public class Realization {
             String[] bookArray = bookToArray.split(",");
             int count = 0;
             for (int i = 0; i < tempArray.length; i++) {
-                tempArray[i] = ++count + " # of book  is" + tempArray[i];
+                tempArray[i] = ++count + " # of book  is " + tempArray[i];
             }
             System.out.println();
             for (String book : tempArray) {
@@ -396,7 +388,8 @@ public class Realization {
             stopDublicateCode();
             int choice = checkDigit();
             int tempLength = tempArray.length == 1 ? tempArray.length : tempArray.length + 1;
-            if (choice <= 0 || choice >= tempLength) {
+            if (choice <= 0 || choice > tempLength) {
+                System.out.println("testcase");
                 errorRobotSay();
                 continue;
             }
@@ -470,15 +463,19 @@ public class Realization {
         }
         robot("Sorry, but you book not find here");
     }
+
     static boolean findBookVer2(String bookName) {
+        if(bookToArray.length() <=1){
+            return false;
+        }
         String[] tempArray = bookToArray.split(",");
         for (String checkName : tempArray) {
             if (checkName.equalsIgnoreCase(bookName)) {
-
+                robot("Sorry, but this book i have");
+                robot("Please, write another book?");
                 return true;
             }
         }
-        robot("Sorry, but this book i have");
         return false;
     }
 
@@ -492,10 +489,9 @@ public class Realization {
         System.out.println("Books in library:");
         String[] tempArray = bookToArray.split(",");
         for (String bookName : tempArray) {
-            System.out.print(bookName + " ");
+            System.out.println(bookName + " ");
         }
     }
-
 }
 
 
