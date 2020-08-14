@@ -83,7 +83,7 @@ public class Realization {
     public static void menu() {
         while (true) {
             stopDublicateCode();
-            String choiceMenu = sc.nextLine();
+            String choiceMenu = sc.nextLine().trim();
             switch (choiceMenu.toLowerCase()) {
                 case "1":
                     addBook();
@@ -151,11 +151,10 @@ public class Realization {
     }
 
     public static void robot(String robotText) {
+        pause(timeRobot);
         System.out.println("\n".repeat(12));
         robot = String.format("     ,_,_,     \r\n     \\O O/     \r\n     /_E_\\     ---- %s  \r\n()ooo|\\=/|ooo()\r\n     |___|    \r\n     /| |\\     \r\n    [_] [_] ", robotText);
         System.out.print(robot);
-        pause(timeRobot);
-
     }
 
     static void pause(int time) {
@@ -169,12 +168,13 @@ public class Realization {
     static void stringCheckUserName() {
         System.out.println();
         while (true) {
+            System.out.println();
             stopDublicateCode();
             userName = sc.nextLine();
             if (userName == null || userName.length() <= 3) {
                 System.out.println("Sorry, you name is impossible. Try again.\nMust be more 3 symbol.");
             } else if (!checkName(userName)) {
-                System.out.println("Sorry, you name is impossible. Try again.\nAt name cannot be numbers.");
+                System.out.println("Sorry, you name is impossible. Try again.\nAt name cannot be numbers or not latters.");
             } else if (checkName(userName)) {
                 return;
             }
@@ -188,7 +188,7 @@ public class Realization {
         robot("You want to change my speed? Write y if yes or write n if no");
         while (true) {
             stopDublicateCode();
-            String answer = sc.nextLine();
+            String answer = sc.nextLine().trim();
             if (answer.equalsIgnoreCase("n")) {
                 robot(String.format("You don't change anything, speed still is : %d", timeRobot));
                 return;
@@ -202,9 +202,8 @@ public class Realization {
                         robot(String.format("*Robot sounds*, now my speed is: %d", timeRobot));
                         return;
                     } else {
-                        robot("Sorry, you number is wrong.");
-                        robot("Like i said before, it must be 3 or more where max is 20");
                         errorRobotSay();
+                        robot("Like i said before, it must be 3 or more where max is 20");
                     }
                 }
             } else {
@@ -218,7 +217,7 @@ public class Realization {
         System.out.println();
         while (true) {
             try {
-                return Integer.parseInt(sc.nextLine());
+                return Integer.parseInt(sc.nextLine().trim());
             } catch (Exception e) {
                 errorRobotSay();
                 stopDublicateCode();
@@ -253,7 +252,7 @@ public class Realization {
             robot("Do you want add more books? Write Y or N like always");
             System.out.println();
             stopDublicateCode();
-            String answ = sc.nextLine();
+            String answ = sc.nextLine().trim();
             if (answ.equalsIgnoreCase("n")) {
                 return;
             } else if (answ.equalsIgnoreCase("y")) {
@@ -270,7 +269,7 @@ public class Realization {
         while (true) {
             boolean checkBool = true;
             stopDublicateCode();
-            String check = sc.nextLine();
+            String check = sc.nextLine().trim();
             if (findBookVer2(check)) {
                 continue;
             }
@@ -279,7 +278,7 @@ public class Realization {
                     && !String.valueOf(temp[0]).equals(" ")
                     && Character.isLetter(temp[0])) {
                 bookToArray += check + ",";
-                robot("Book is add");
+                robot("*bi-bip souns* Book is add");
                 return;
             } else if (check.length() > 2) {
                 int tempCountSymbol = 0;
@@ -313,7 +312,8 @@ public class Realization {
                 "\n2. First symbol must be always be a letter " +
                 "\n3. Letters must be more then another symbols" +
                 "\n4. Books name cannot be have symbol \",\"" +
-                "\n5. Books cannot be repeat if it have in library");
+                "\n5. Books cannot be repeat if it have in library" +
+                "\n6. Book titles are not case sensitive ");
         pause(timeRobot + 2);
     }
 
@@ -328,7 +328,7 @@ public class Realization {
             String[] bookArray = bookToArray.split(",");
             int count = 0;
             for (int i = 0; i < tempArray.length; i++) {
-                tempArray[i] = ++count + " # of book  is" + tempArray[i];
+                tempArray[i] = ++count + " # of book  is " + tempArray[i];
             }
             System.out.println();
             for (String book : tempArray) {
@@ -359,7 +359,7 @@ public class Realization {
             robot("Do you want delete more books? Write Y or N like always");
             System.out.println();
             stopDublicateCode();
-            String answ = sc.next();
+            String answ = sc.nextLine().trim();
 
             if (answ.equalsIgnoreCase("n")) {
                 return;
@@ -396,7 +396,7 @@ public class Realization {
             System.out.println();
             robot("Now write new name of book");
             stopDublicateCode();
-            bookArray[choice - 1] = sc.nextLine();
+            bookArray[choice - 1] = sc.nextLine().trim();
             bookToArrayUpdate = "";
             for (int i = 0; i < bookArray.length; i++) {
                 String s = bookArray[i];
@@ -408,7 +408,7 @@ public class Realization {
             robot("Do you want change more books? Write Y or N like always");
             System.out.println();
             stopDublicateCode();
-            String answ = sc.nextLine();
+            String answ = sc.nextLine().trim();
             if (answ.equalsIgnoreCase("n")) {
                 return;
             } else if (answ.equalsIgnoreCase("y")) {
@@ -427,12 +427,12 @@ public class Realization {
             System.out.println();
             String choiceToFind;
             stopDublicateCode();
-            choiceToFind = sc.nextLine();
+            choiceToFind = sc.nextLine().trim();
             if (choiceToFind.equalsIgnoreCase("show")) {
                 showBooks();
                 robot("Do you want find more books? Y or N like always");
                 stopDublicateCode();
-                choiceToFind = sc.nextLine();
+                choiceToFind = sc.nextLine().trim();
                 if (choiceToFind.equalsIgnoreCase("n")) {
                     break;
                 } else if (choiceToFind.equalsIgnoreCase("y")) {
@@ -440,9 +440,9 @@ public class Realization {
                 }
             } else if (choiceToFind.equalsIgnoreCase("find")) {
                 findBook(choiceToFind);
-                robot("Do you want find more books?");
+                robot("Do you want find more books? Y or N like always");
                 stopDublicateCode();
-                choiceToFind = sc.nextLine();
+                choiceToFind = sc.nextLine().trim();
                 if (choiceToFind.equalsIgnoreCase("n")) {
                     break;
                 } else if (choiceToFind.equalsIgnoreCase("y")) {
@@ -454,6 +454,9 @@ public class Realization {
     }
 
     static void findBook(String bookName) {
+        robot("Write name book what you wanna find");
+        stopDublicateCode();
+        String bookCheck = sc.nextLine();
         String[] tempArray = bookToArray.split(",");
         for (String checkName : tempArray) {
             if (checkName.equalsIgnoreCase(bookName)) {
@@ -465,14 +468,14 @@ public class Realization {
     }
 
     static boolean findBookVer2(String bookName) {
-        if(bookToArray.length() <=1){
+        if (bookToArray.length() <= 1) {
             return false;
         }
         String[] tempArray = bookToArray.split(",");
         for (String checkName : tempArray) {
             if (checkName.equalsIgnoreCase(bookName)) {
                 robot("Sorry, but this book i have");
-                robot("Please, write another book?");
+                robot("Please, write another book");
                 return true;
             }
         }
@@ -491,6 +494,11 @@ public class Realization {
         for (String bookName : tempArray) {
             System.out.println(bookName + " ");
         }
+        pause(timeRobot);
+    }
+
+    static void checkBookNameV2(String nameBook) {
+
     }
 }
 

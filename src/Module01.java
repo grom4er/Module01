@@ -19,7 +19,7 @@ Idea - interactive chat-bot
 
         System.out.println("Idea - interactive chat-bot \nFor test menu write test\nFor test full program write start");
         while (true){
-            String answ = scanner.nextLine();
+            String answ = scanner.nextLine().trim();
             if(answ.equalsIgnoreCase("start")){
                 Realization.start();
                 break;
