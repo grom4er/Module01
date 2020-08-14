@@ -9,7 +9,7 @@ because it is difficult to find work my idea a way without crutches for all plat
 2. I must everywhere use throws InterruptedException to use TimeUnit.SECONDS.sleep(time); - fixed i use myself method can not work perfect (maybe)
 3. I am use regular expression twice. - fixed. Not sure
 3. Username can have spaces. And cannot be in Ukraine symbols - fixed
-4. Username cannot have double-triple name like Ras Abdul etc. - that i not fix;
+4. Username cannot have double-triple name like Ras Abdul etc.;
 4. Book name cannot have symbol "," - big problem
 5. if the user changes his mind about performing the operation. He always must DO it;
 6. Add more class to name functions - need do it after code review
@@ -26,6 +26,15 @@ because it is difficult to find work my idea a way without crutches for all plat
 16. Some menu can work without books; - fix
 17. add comentary
 18. Book change logic have mistake
+19. ChangespeedMethod, y/n logic conflict + miss one /n
+20. Same like 19, but logic about speed
+21. now we in menu of my library Sada. Choice menu:   - mistake
+22. After menu not show  where write coomand
+23. Accept about book was delete
+24.  Now i show you books in library   - no pause
+25. 5 menu, y/n not take error, just back to meny
+26. ---- Write name book what you wanna find   - not /н
+27. Not work find (!) - big problem
 
 
 
@@ -33,10 +42,10 @@ because it is difficult to find work my idea a way without crutches for all plat
  */
 
 public class Realization {
-    static Scanner sc = new Scanner(System.in);
-    static String userName;
-    static String robot;
-    static int timeRobot = 3;
+    static Scanner sc = new Scanner(System.in); // 1 scanner for all aplication
+    static String userName; // for safe user name
+    static String robot; // for print robot
+    static int timeRobot = 3; // time robot, important to pause
     static String[] arrayMenu = {"1. Add book"
             , "2. Delete book"
             , "3. Change name book"
@@ -45,18 +54,19 @@ public class Realization {
             , "6. Sort books by names"
             , "7. back to robot configuration speed"
             , "8. Exit"
-            , "99. Joke"};
-    static String bookToArray = "";
-    static String bookToArrayUpdate;
+            , "99. Joke"}; // menu
+    static String bookToArray = ""; // String, where i have all books.
+    static String bookToArrayUpdate; // Crutch
+    static String noBook = "Sorry, but in my library no one book. Add first."; // to stop dublicate
 
 
-    public static void start() {
+    public static void start() { // Method to start.
         robotHello();
         menuOfProgram();
     }
 
     public static void robotHello() {
-        robot("Hello. My name is Alex. A am librarian.");
+        robot("Hello. My name is DestroyerWorld2000. A am librarian.");
         robot("So, how is you name? Please write it:");
         stringCheckUserName();
         robot(String.format("So, i glad to see you %s", userName));
@@ -66,17 +76,16 @@ public class Realization {
         robot("It must be second from 3-20 and an integer");
         robot("So, all it time before we talk on speed 3.");
         robotSpeedChange();
-
     }
 
     static void menuOfProgram() {
         while (true) {
-            robot(String.format("*Robot sounds*, now we in menu of my library %s. Choice menu:", userName == null ? "Guest" : userName));
+            robot(String.format("*Robot sounds*, now we in menu of my library %s. Choice menu:", userName == null ? "Guest" : userName)); // check for test/start option
             System.out.println();
             showMenu();
             pause(timeRobot + 2);
             robot("*Robot sounds*, what menu you want to use? Write number");
-            menu();
+            menu(); //start main method for menu
         }
     }
 
@@ -89,7 +98,7 @@ public class Realization {
                     addBook();
                     break;
                 case "2":
-                    if (bookToArray.length() <= 1) {
+                    if (checkNullLibrary()) {
                         robot("Sorry, but in my library no one book. Add first.");
                     } else {
                         deleteBook();
@@ -97,7 +106,7 @@ public class Realization {
                     break;
                 case "3":
                     if (bookToArray.length() <= 1) {
-                        robot("Sorry, but in my library no one book. Add first.");
+                        robot(noBook);
                     } else {
                         changeBookName();
                     }
@@ -105,21 +114,21 @@ public class Realization {
                 case "4":
                     System.out.println();
                     if (bookToArray.length() <= 1) {
-                        robot("Sorry, but in my library no one book. Add first.");
+                        robot(noBook);
                     } else {
                         showBooks();
                     }
                     break;
                 case "5":
                     if (bookToArray.length() <= 1) {
-                        robot("Sorry, but in my library no one book. Add first.");
+                        robot(noBook);
                     } else {
                         findBookMenu();
                     }
                     break;
                 case "6":
                     if (bookToArray.length() <= 1) {
-                        robot("Sorry, but in my library no one book. Add first.");
+                        robot(noBook);
                     } else {
                         robot("Books are sorted. Please, check it in menu \"4\" ");
                         Arrays.sort(bookToArray.split(","));
@@ -178,9 +187,7 @@ public class Realization {
             } else if (checkName(userName)) {
                 return;
             }
-
         }
-
     }
 
     static void robotSpeedChange() {
@@ -207,6 +214,7 @@ public class Realization {
                     }
                 }
             } else {
+                robot("You want to change my speed? Write y if yes or write n if no");
                 errorRobotSay();
             }
         }
@@ -267,7 +275,6 @@ public class Realization {
         robot("Remember, books has Rules:");
         rulesBooksName();
         while (true) {
-            boolean checkBool = true;
             stopDublicateCode();
             String check = sc.nextLine().trim();
             if (findBookVer2(check)) {
@@ -275,7 +282,6 @@ public class Realization {
             }
             char[] temp = check.toCharArray();
             if (check.length() == 2
-                    && !String.valueOf(temp[0]).equals(" ")
                     && Character.isLetter(temp[0])) {
                 bookToArray += check + ",";
                 robot("*bi-bip souns* Book is add");
@@ -296,12 +302,7 @@ public class Realization {
                     return;
                 }
             }
-            if (checkBool) {
-                errorRobotSay();
-                robot("Book names has rules:");
-                rulesBooksName();
-                System.out.println("\n".repeat(12));
-            }
+          errorRobotSay();
         }
     }
 
@@ -356,17 +357,18 @@ public class Realization {
                 robot("Sorry, books are over");
                 return;
             }
-            robot("Do you want delete more books? Write Y or N like always");
-            System.out.println();
-            stopDublicateCode();
-            String answ = sc.nextLine().trim();
-
-            if (answ.equalsIgnoreCase("n")) {
-                return;
-            } else if (answ.equalsIgnoreCase("y")) {
-                continue;
+            while (true){
+                robot("Do you want delete more books? Write Y or N like always");
+                System.out.println();
+                stopDublicateCode();
+                String answ = sc.nextLine().trim();
+                if (answ.equalsIgnoreCase("n")) {
+                    return;
+                } else if (answ.equalsIgnoreCase("y")) {
+                    continue;
+                }
+                errorRobotSay();
             }
-            errorRobotSay();
         }
     }
 
@@ -468,7 +470,7 @@ public class Realization {
     }
 
     static boolean findBookVer2(String bookName) {
-        if (bookToArray.length() <= 1) {
+        if (checkNullLibrary()) {
             return false;
         }
         String[] tempArray = bookToArray.split(",");
@@ -497,10 +499,11 @@ public class Realization {
         pause(timeRobot);
     }
 
-    static void checkBookNameV2(String nameBook) {
-
+    static boolean checkNullLibrary() {
+        return bookToArray.length() <= 1 ? true : false; // to stop duplicate code
     }
-}
 
+}
+// 100 code
 
 

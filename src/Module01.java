@@ -9,12 +9,6 @@ And also, I think it's fun!
 Let you have fun too!
 Idea - interactive chat-bot
      */
-
-
-
-
-
-
     public static void main(String[] args)  {
 
         System.out.println("Idea - interactive chat-bot \nFor test menu write test\nFor test full program write start");
@@ -33,8 +27,5 @@ Idea - interactive chat-bot
                 System.out.println("Try again");
             }
         }
-
-
-
     }
 }
