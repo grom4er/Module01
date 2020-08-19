@@ -25,16 +25,16 @@ because it is difficult to find work my idea a way without crutches for all plat
 15. Can be add duplicate books; - fix
 16. Some menu can work without books; - fix
 17. add comentary
-18. Book change logic have mistake
-19. ChangespeedMethod, y/n logic conflict + miss one /n
-20. Same like 19, but logic about speed
-21. now we in menu of my library Sada. Choice menu:   - mistake
-22. After menu not show  where write coomand
-23. Accept about book was delete
-24.  Now i show you books in library   - no pause
-25. 5 menu, y/n not take error, just back to meny
-26. ---- Write name book what you wanna find   - not /н
-27. Not work find (!) - big problem
+18. Book change logic have mistake - fix
+19. ChangespeedMethod, y/n logic conflict + miss one /n - fix?
+20. Same like 19, but logic about speed - fix?
+21. now we in menu of my library Sada. Choice menu:   - fix
+22. After menu not show  where write coomand -fix?
+23. Accept about book was delete - fix
+24.  Now i show you books in library   - no pause - fix?
+25. 5 menu, y/n not take error, just back to meny - fix
+26. ---- Write name book what you wanna find   - not /н - fix?
+27. Not work find (!) - big problem - fix?
 
 
 
@@ -67,11 +67,11 @@ public class Realization {
 
     public static void robotHello() {
         robot("Hello. My name is DestroyerWorld2000. A am librarian.");
-        robot("So, how is you name? Please write it:");
+        robot("So, what is you name? Please write it:");
         stringCheckUserName();
         robot(String.format("So, i glad to see you %s", userName));
         robot("I help you in library, but first you need help me.");
-        robot("Like you see, i robot. But you just are human!");
+        robot("Like you see, i  cool robot. But you just are human!");
         robot("So, you can - write me speed how i will talk with you.");
         robot("It must be second from 3-20 and an integer");
         robot("So, all it time before we talk on speed 3.");
@@ -81,7 +81,7 @@ public class Realization {
     static void menuOfProgram() {
         while (true) {
             robot(String.format("*Robot sounds*, now we in menu of my library %s. Choice menu:", userName == null ? "Guest" : userName)); // check for test/start option
-            System.out.println();
+            pause(timeRobot);
             showMenu();
             pause(timeRobot + 2);
             robot("*Robot sounds*, what menu you want to use? Write number");
@@ -177,7 +177,6 @@ public class Realization {
     static void stringCheckUserName() {
         System.out.println();
         while (true) {
-            System.out.println();
             stopDublicateCode();
             userName = sc.nextLine();
             if (userName == null || userName.length() <= 3) {
@@ -214,8 +213,8 @@ public class Realization {
                     }
                 }
             } else {
-                robot("You want to change my speed? Write y if yes or write n if no");
                 errorRobotSay();
+                robot("You want to change my speed? Write y if yes or write n if no");
             }
         }
     }
@@ -258,7 +257,6 @@ public class Realization {
             robot("*robot sounds*, you choice add book. Write book name:");
             checkNameBook();
             robot("Do you want add more books? Write Y or N like always");
-            System.out.println();
             stopDublicateCode();
             String answ = sc.nextLine().trim();
             if (answ.equalsIgnoreCase("n")) {
@@ -271,12 +269,14 @@ public class Realization {
         }
     }
 
-    static void checkNameBook() {
+    static String checkNameBook() {
+        String check;
         robot("Remember, books has Rules:");
         rulesBooksName();
         while (true) {
+            System.out.println();
             stopDublicateCode();
-            String check = sc.nextLine().trim();
+            check = sc.nextLine().trim();
             if (findBookVer2(check)) {
                 continue;
             }
@@ -285,7 +285,7 @@ public class Realization {
                     && Character.isLetter(temp[0])) {
                 bookToArray += check + ",";
                 robot("*bi-bip souns* Book is add");
-                return;
+               break;
             } else if (check.length() > 2) {
                 int tempCountSymbol = 0;
                 int tempCountLetter = 0;
@@ -299,18 +299,19 @@ public class Realization {
                 if (tempCountSymbol < tempCountLetter) {
                     robot("Book is add");
                     bookToArray += check + ",";
-                    return;
                 }
+
             }
-          errorRobotSay();
+            errorRobotSay();
         }
+        return check;
     }
 
     static void rulesBooksName() {
         System.out.println("\n".repeat(12));
         System.out.println("Rules of name book" +
                 "\n1. Name must be more 1 symbol " +
-                "\n2. First symbol must be always be a letter " +
+                "\n2. If only two sybols: first symbol must be always be a letter " +
                 "\n3. Letters must be more then another symbols" +
                 "\n4. Books name cannot be have symbol \",\"" +
                 "\n5. Books cannot be repeat if it have in library" +
@@ -340,10 +341,7 @@ public class Realization {
             stopDublicateCode();
             int choice = checkDigit();
             int tempLength = tempArray.length == 1 ? tempArray.length : tempArray.length + 1;
-            if (choice <= 0 || choice >= tempLength) {
-                errorRobotSay();
-                continue;
-            }
+            choice = checkNumberOfBook(choice, tempLength);
             bookArray[choice - 1] = " ";
             bookToArrayUpdate = "";
             for (int i = 0; i < bookArray.length; i++) {
@@ -352,12 +350,13 @@ public class Realization {
                     bookToArrayUpdate += s + ",";
                 }
             }
+            robot("Book was deleted");
             bookToArray = bookToArrayUpdate;
             if (bookArray.length <= 1) {
                 robot("Sorry, books are over");
                 return;
             }
-            while (true){
+            while (true) {
                 robot("Do you want delete more books? Write Y or N like always");
                 System.out.println();
                 stopDublicateCode();
@@ -389,12 +388,9 @@ public class Realization {
             robot("Just write number of book you want to change");
             stopDublicateCode();
             int choice = checkDigit();
+
             int tempLength = tempArray.length == 1 ? tempArray.length : tempArray.length + 1;
-            if (choice <= 0 || choice > tempLength) {
-                System.out.println("testcase");
-                errorRobotSay();
-                continue;
-            }
+            choice = checkNumberOfBook(choice, tempLength);
             System.out.println();
             robot("Now write new name of book");
             stopDublicateCode();
@@ -427,11 +423,11 @@ public class Realization {
             robot("Write \"show\", and i just show you books");
             robot("Or write  \"find\", and i try find it");
             System.out.println();
-            String choiceToFind;
             stopDublicateCode();
-            choiceToFind = sc.nextLine().trim();
+            String choiceToFind = sc.nextLine().trim();
             if (choiceToFind.equalsIgnoreCase("show")) {
                 showBooks();
+                pause(2);
                 robot("Do you want find more books? Y or N like always");
                 stopDublicateCode();
                 choiceToFind = sc.nextLine().trim();
@@ -439,9 +435,12 @@ public class Realization {
                     break;
                 } else if (choiceToFind.equalsIgnoreCase("y")) {
                     continue;
+                } else {
+                    errorRobotSay();
+                    robot("I back you to menu 5");
                 }
             } else if (choiceToFind.equalsIgnoreCase("find")) {
-                findBook(choiceToFind);
+                findBook();
                 robot("Do you want find more books? Y or N like always");
                 stopDublicateCode();
                 choiceToFind = sc.nextLine().trim();
@@ -455,13 +454,14 @@ public class Realization {
         }
     }
 
-    static void findBook(String bookName) {
+    static void findBook() {
+        System.out.println();
         robot("Write name book what you wanna find");
         stopDublicateCode();
-        String bookCheck = sc.nextLine();
+        String bookCheck = sc.nextLine().trim();
         String[] tempArray = bookToArray.split(",");
         for (String checkName : tempArray) {
-            if (checkName.equalsIgnoreCase(bookName)) {
+            if (checkName.equalsIgnoreCase(bookCheck)) {
                 robot("I find you book!");
                 return;
             }
@@ -490,6 +490,7 @@ public class Realization {
 
     static void showBooks() {
         robot("Now i show you books in library");
+        pause(timeRobot);
         System.out.println("\n".repeat(12));
         System.out.println("Books in library:");
         String[] tempArray = bookToArray.split(",");
@@ -501,6 +502,19 @@ public class Realization {
 
     static boolean checkNullLibrary() {
         return bookToArray.length() <= 1 ? true : false; // to stop duplicate code
+    }
+
+    static int checkNumberOfBook(int userNumber, int tempLength) {
+        while (true)
+            if (userNumber <= 0 || userNumber > tempLength) {
+                errorRobotSay();
+                stopDublicateCode();
+                userNumber = checkDigit();
+                continue;
+            } else {
+                break;
+            }
+        return userNumber;
     }
 
 }
